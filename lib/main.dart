@@ -60,13 +60,6 @@ const _kLoggedIn = 'sv_logged_in';
 const _kName     = 'sv_name';
 const _kEmail    = 'sv_email';
 const _kPass     = 'sv_pass';
-
-// ══════════════════════════════════════════════════════════════════════════════
-// ⚠️  PENTING: Ganti value di bawah dengan API Key Groq kamu yang valid!
-//    Ambil GRATIS dari: https://console.groq.com/keys  → Create API Key
-//    Format key biasanya: gsk_... (panjang ~56 karakter)
-//    Model vision: meta-llama/llama-4-scout-17b-16e-instruct
-// ══════════════════════════════════════════════════════════════════════════════
 const _kGroqApiKey = "";
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
@@ -327,7 +320,7 @@ Future<List<DetectedObj>> detectWithGroq(String imagePath) async {
   if (_kGroqApiKey.isEmpty ||
       _kGroqApiKey.startsWith("GANTI_") ||
       _kGroqApiKey.length < 20) {
-    debugPrint("[Groq] ⚠️ API Key belum diset! Isi _kGroqApiKey dengan key valid dari console.groq.com");
+    debugPrint("[Groq] API Key belum diset! Isi _kGroqApiKey dengan key valid dari console.groq.com");
     return [];
   }
   try {
@@ -396,7 +389,7 @@ HANYA JSON array.""";
         ).timeout(const Duration(seconds: 30));
 
         if (resp.statusCode == 200) {
-          debugPrint("[Groq] ✅ Model '$model' berhasil digunakan");
+          debugPrint("[Groq] Model '$model' berhasil digunakan");
           break;
         } else if (resp.statusCode == 404 || resp.statusCode == 400) {
           debugPrint("[Groq] Model '$model' tidak tersedia (${resp.statusCode}), coba berikutnya...");
@@ -414,7 +407,7 @@ HANYA JSON array.""";
     }
 
     if (resp == null || resp.statusCode != 200) {
-      debugPrint("[Groq] ❌ Semua model gagal atau resp null");
+      debugPrint("[Groq] Semua model gagal atau resp null");
       return [];
     }
 
@@ -969,7 +962,7 @@ class _WelcomeState extends State<WelcomeScreen> with TickerProviderStateMixin {
                     color: const Color(0xFFF59E0B).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: const Color(0xFFF59E0B).withOpacity(0.4))),
-                child: const Text("💡 Tombol DAFTAR & MASUK ada di bawah — sentuh untuk memilih",
+                child: const Text("Tombol DAFTAR & MASUK ada di bawah — sentuh untuk memilih",
                     style: TextStyle(color: Color(0xFFF59E0B), fontSize: 11),
                     textAlign: TextAlign.center)),
           ],
@@ -2315,7 +2308,7 @@ class _MainState extends State<MainAppScreen>
         final uri = Uri.parse(u);
         final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
         if (launched) {
-          debugPrint("[Maps] ✅ Berhasil buka: $u");
+          debugPrint("[Maps] Berhasil buka: $u");
           return;
         }
       } catch (_) {}
@@ -2893,16 +2886,16 @@ class _MainState extends State<MainAppScreen>
                           .withOpacity(0.4))),
                   child: Text(
                       _phase == Phase.scanning
-                          ? "🔍 Memindai objek..."
+                          ? "Memindai objek..."
                           : _phase == Phase.navigating
-                          ? "🗺 Navigasi aktif — ${_destination.isNotEmpty ? _destination : ''}"
+                          ? "Navigasi aktif — ${_destination.isNotEmpty ? _destination : ''}"
                           : _phase == Phase.listening
-                          ? "🎙 Mendengarkan..."
+                          ? "Mendengarkan..."
                           : _phase == Phase.repeating
-                          ? "🔁 Mengulang..."
+                          ? "Mengulang..."
                           : _phase == Phase.setting
-                          ? "⚙️ Pengaturan"
-                          : "⏳ Memproses...",
+                          ? "Pengaturan"
+                          : "Memproses...",
                       style: TextStyle(
                           color: _phase == Phase.listening
                               ? Colors.greenAccent : Colors.orange,
